@@ -1,18 +1,7 @@
-__author__ = 'Robbie Barrat'
+from pathlib import Path
 
-# Put the words you are trying to find here. All the text you enter should be 100% uppercase or 100% lowercase.
-
-solutions = ['PYTHON', 'ROBBIE', 'GITHUB', 'BEEF']
-
-# Here goes your puzzle, separate each letter by a space.
-
-puzzle ='''B P G S B S O R
-U D Y B E E F O
-H B W T E R G B
-T Z C N H D E B
-I E E W Z O S I
-G C H A N B N E
-'''
+solutions = Path('solution_list.txt').read_text().strip().splitlines()
+puzzle = Path('puzzle.txt').read_text().strip()
 
 # Just formats the puzzle into a more computer-readable text
 wordgrid = puzzle.replace(' ','')
@@ -44,12 +33,12 @@ wordlines['going upwards and right diagonally'] = [i for i in reversed(wordlines
 
 
 def printitout(direction, tuple, lines):
-    print "Keep in mind, rows are horizontal and columns are vertical.\n"
+    print("Keep in mind, rows are horizontal and columns are vertical.\n")
     for direction, tuple in lines.items():
         string = ''.join([i[0] for i in tuple])
         for word in solutions:
             if word in string:
                 coordinates = tuple[string.index(word)][1]
-                print word, 'is at row', coordinates[0]+1, 'and column', coordinates[1]+1, direction + "."
+                print(f'{word}, is at row, {coordinates[0]+1}, and column, {coordinates[1]+1} {direction}.')
 
 printitout(word_direction, tuple, wordlines)
